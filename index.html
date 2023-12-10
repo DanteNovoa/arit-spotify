@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 100 Artists</title>
+</head>
+<body>
+    <h1>Top 100 Artists</h1>
+    <ul>
+        {% for nombre, valor in zip(nombres, valores) %}
+            <li>{{ nombre }} - {{ valor }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
