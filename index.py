@@ -1,11 +1,9 @@
-from flask import Flask, render_template, request
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from pprint import pprint
 from dict_raperos import artistas_dict1
 import createcsv
 
-app = Flask(__name__)
 
 MAX_RESULTS = 5
 author = 'Tino el'
@@ -19,10 +17,10 @@ def get_client():
     sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id, client_secret))
     return sp 
 
-def get_top_100():
+def get_artists_data():
     sp_client = get_client()
-    for artista in artistas_dict1:
-        artista_id = artista["id"]
+    for element in artistas_dict1:
+        artista_id = element["id"]
         try:
             artista = sp_client.artist(artista_id)
         except Exception as e:
@@ -31,3 +29,6 @@ def get_top_100():
         artistas_result1[artista['name']] = artista['followers']['total']
     top = dict(sorted(artistas_result1.items(), key=lambda item: item[1], reverse=True))
     return top
+
+top_100 = get_artists_data()
+print(len(top_100))
